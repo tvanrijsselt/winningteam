@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`users` (
   `lastname` VARCHAR(55) NOT NULL,
   `username` VARCHAR(45) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(255) NOT NULL,
   `bio` VARCHAR(255) NULL,
   `country` VARCHAR(45) NULL,
   `birthdate` DATETIME NULL,
