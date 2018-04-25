@@ -9,7 +9,7 @@
     $password = $_SESSION['password'];
     $userid = $_SESSION['user-id'];
     header("Location: account.php");
-  } 
+  }
 
   if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -39,7 +39,7 @@
   </head>
   <body>
 
-    Log in to change your CV.
+    Log in to change your Twitter account.
     <br>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
       <div class="form-group row justify-content-center">
