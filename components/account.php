@@ -16,6 +16,20 @@
 
 <?php
 
+  $show_tweets = "SELECT tweet, tweets.id FROM tweets JOIN users ON tweets.user_id = users.id WHERE username = '{$_SESSION['username']}'";
+
+  // Get account info to display in the input fields
+  $currentFirstName = fetch_record("SELECT firstname FROM users WHERE username = '$username'")['firstname'];
+  $currentLastName = fetch_record("SELECT lastname FROM users WHERE username = '$username'")['lastname'];
+  $currentEmail = fetch_record("SELECT email FROM users WHERE username = '$username'")['email'];
+  $currentBiography = fetch_record("SELECT bio FROM users WHERE username = '$username'")['bio'];
+  $currentCountry = fetch_record("SELECT country FROM users WHERE username = '$username'")['country'];
+  $currentBirthdate = fetch_record("SELECT birthdate FROM users WHERE username = '$username'")['birthdate'];
+
+ ?>
+
+<?php
+
 // // process the forms on the page
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -23,37 +37,46 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   $errors = array();
 
   //---- process for changing the first name ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'firstname') {
+  if(isset($_POST['action']) && $_POST['action'] == 'Submit Changes') {
     // check if the first name field is empty
-    if(empty($_POST['firstname'])) {
-      $errors[] = "The field for updating a name cannot be blank.";
+    // if(empty($_POST['firstname'])) {
+    //   $errors[] = "The field for updating your first name cannot be blank.";
+    // }
+
+    if (!preg_match("/^[a-zA-Z ]*$/", $_POST['firstname'])) {
+      $errors[] = "Only letters and white space allowed for your name";
     }
 
     if(count($errors) > 0) {
       $_SESSION['message'] = '';
       $_SESSION['errors'] = $errors;
-    } else {
+    } elseif ($_POST['firstname'] !== $currentFirstName){
       $_SESSION['errors'] = array();
 
       $query = "UPDATE users SET firstname = '{$_POST['firstname']}' WHERE id = $userid";
 
       if(mysqli_query($connection, $query))
       {
-        $_SESSION['message-success'] = "Name has been updated correctly!";
+        $_SESSION['message-success'] = "Your profile has been updated correctly!";
+        header("Location: account.php");
       }
       else
       {
-        $_SESSION['message-fail'] = "Failed to update name..";
+        $_SESSION['message-fail'] = "Failed to update your first name..";
       }
     }
   }
   //---- end of process for changing the first name ----//
 
-  //---- process for changing the last name ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'lastname') {
+  // ---- process for changing the last name ----//
+  // if(isset($_POST['action']) && $_POST['action'] == 'lastname') {
     // check if the first name field is empty
-    if(empty($_POST['lastname'])) {
-      $errors[] = "The field for updating a name cannot be blank.";
+    // if(empty($_POST['lastname'])) {
+    //   $errors[] = "The field for updating your last name cannot be blank.";
+    // }
+
+    if (!preg_match("/^[a-zA-Z ]*$/", $_POST['lastname'])) {
+      $errors[] = "Only letters and white space allowed for your name";
     }
 
     if(count($errors) > 0) {
@@ -66,18 +89,19 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if(mysqli_query($connection, $query))
       {
-        $_SESSION['message-success'] = "Name has been updated correctly!";
+        $_SESSION['message-success'] = "Your profile has been updated correctly!";
+        header("Location: account.php");
       }
       else
       {
-        $_SESSION['message-fail'] = "Failed to update name..";
+        $_SESSION['message-fail'] = "Failed to update your last name..";
       }
     }
-  }
+  // }
   //---- end of process for changing the last name ----//
 
   //---- process for changing the email ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'email') {
+  // if(isset($_POST['action']) && $_POST['action'] == 'email') {
 
     $email = escape_this_string($_POST['email']);
 
@@ -91,7 +115,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['message'] = '';
       $_SESSION['errors'] = $errors;
     } else {
-      $_SESSION['errors'] = array();
+      // $_SESSION['errors'] = array();
 
       $email = htmlspecialchars(strip_tags(trim($email)));
 
@@ -99,30 +123,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if(mysqli_query($connection, $query))
       {
-        $_SESSION['message-success'] = "Email has been updated correctly!";
+        $_SESSION['message-success'] = "Your profile has been updated correctly!";
+        header("Location: account.php");
       }
       else
       {
         $_SESSION['message-fail'] = "Failed to update email..";
       }
     }
-  }
+  // }
   //---- end of process for changing the email ----//
-
+  //
   //---- process for changing the biography ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'bio') {
+  // if(isset($_POST['action']) && $_POST['action'] == 'bio') {
 
     $bio = escape_this_string($_POST['biography']);
 
-    if(empty($bio)) {
-      $errors[] = "Some content is required.";
-    }
+    // if(empty($bio)) {
+    //   $errors[] = "Some content is required for your b.";
+    // }
 
     if(count($errors) > 0) {
       $_SESSION['message'] = '';
       $_SESSION['errors'] = $errors;
     } else {
-      $_SESSION['errors'] = array();
+      // $_SESSION['errors'] = array();
 
       $bio = htmlspecialchars(strip_tags(trim($bio)));
 
@@ -130,24 +155,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if(mysqli_query($connection, $query))
       {
-        $_SESSION['message-success'] = "Biography has been updated correctly!";
+        header("Location: account.php");
+        $_SESSION['message-success'] = "Your profile has been updated correctly!";
       }
       else
       {
         $_SESSION['message-fail'] = "Failed to update biography..";
       }
     }
-  }
+  // }
   //---- end of process for changing the biography ----//
-
+  //
   //---- process for changing the country ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'country') {
+  // if(isset($_POST['action']) && $_POST['action'] == 'country') {
 
     $country = escape_this_string($_POST['country']);
 
-    if(empty($country)) {
-      $errors[] = "Some content is required.";
-    } if (!preg_match("/^[a-zA-Z ]*$/", $country)) {
+    // if(empty($country)) {
+    //   $errors[] = "Some content is required.";
+    // }
+    if (!preg_match("/^[a-zA-Z ]*$/", $country)) {
       $errors[] = "Only letters and white space allowed";
     }
 
@@ -155,7 +182,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       $_SESSION['message'] = '';
       $_SESSION['errors'] = $errors;
     } else {
-      $_SESSION['errors'] = array();
+      // $_SESSION['errors'] = array();
 
       $country = htmlspecialchars(strip_tags(trim($country)));
 
@@ -170,23 +197,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['message-fail'] = "Failed to update country..";
       }
     }
-  }
+  // }
   //---- end of process for changing the country ----//
-
+  //
   //---- process for changing the birthdate ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'birthdate') {
+  // if(isset($_POST['action']) && $_POST['action'] == 'birthdate') {
 
     $birthdate = escape_this_string($_POST['birthdate']);
 
-    if(empty($birthdate)) {
-      $errors[] = "A birthday is required.";
-    }
+    // if(empty($birthdate)) {
+    //   $errors[] = "A birthday is required.";
+    // }
 
     if(count($errors) > 0) {
       $_SESSION['message'] = '';
       $_SESSION['errors'] = $errors;
     } else {
-      $_SESSION['errors'] = array();
+      // $_SESSION['errors'] = array();
 
       $birthdate = htmlspecialchars(strip_tags(trim($birthdate)));
 
@@ -194,35 +221,38 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if(mysqli_query($connection, $query))
       {
-        $_SESSION['message-success'] = "birthdate has been updated correctly!";
+        $_SESSION['message-success'] = "Your profile has been updated correctly!";
       }
       else
       {
         $_SESSION['message-fail'] = "Failed to update birthdate..";
       }
     }
-  }
+  // }
   //---- end of process for changing the birthdate ----//
 
-  //---- process for changing the birthdate ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'gender') {
-    $gender = $_POST['gender'];
-
-    $query = "UPDATE users SET gender = '$gender' WHERE id = $userid";
-
-    if(mysqli_query($connection, $query))
-    {
-      $_SESSION['message-success'] = "gender has been updated correctly!";
-    }
-    else
-    {
-      $_SESSION['message-fail'] = "Failed to update gender..";
-    }
-  }
-  //---- end of process for changing the birthdate ----//
-
-  //---- process for changing the password ----//
-  if(isset($_POST['action']) && $_POST['action'] == 'password') {
+  //---- process for changing the gender ----//
+  // if(isset($_SESSION['gender']) {
+  //   $gender = $_POST['gender'];
+  //
+  //   $query = "UPDATE users SET gender = '$gender' WHERE id = $userid";
+  //
+  //   if(mysqli_query($connection, $query))
+  //   {
+  //     $_SESSION['message-success'] = "Gender has been updated correctly!";
+  //     $_SESSION['gender'] = $gender;
+  //   }
+  //   else
+  //   {
+  //     $_SESSION['message-fail'] = "Failed to update gender..";
+  //   }
+  // } else {
+  //
+  // }
+  // ---- end of process for changing the gender ----//
+  //
+  // ---- process for changing the password ----//
+  // if(isset($_POST['action']) && $_POST['action'] == 'password') {
     $password = escape_this_string($_POST['current-password']);
     $userPassword = fetch_record("SELECT password FROM users WHERE username = '$username'")['password'];
 
@@ -236,8 +266,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['errors'] = $errors;
       } else {
         $encrypted_password = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
-        $_SESSION['errors'] = array();
+        // $_SESSION['errors'] = array();
 
+        $password = escape_this_string($_POST['current-password']);
         $query = "UPDATE users SET password = '$encrypted_password' WHERE id = $userid";
 
         if(mysqli_query($connection, $query))
@@ -257,7 +288,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['errors'] = $errors;
       }
     }
-  }
+  // }
   //---- end of process for changing the password ----//
 
 }
@@ -271,7 +302,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Account</title>
   </head>
   <body>
-    <h2>Welcome to the admin page, <?php echo $_SESSION['username']; ?>!</h2>
+    <h2>Welcome to the admin page, <?php echo $username; ?>!</h2>
     <form class="" action="logout.php" method="post">
       <input type="submit" name="" value="Log Out">
     </form>
@@ -281,77 +312,88 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="col">
           <br>
           <label for="change-firstname" class="font-weight-bold login-input-label">Change first name</label>
-          <input type="text" name="firstname" value="" class="login-input" id="change-firstname">
+          <input type="text" name="firstname" value="<?php echo $currentFirstName ?>" class="login-input" id="change-firstname">
           <input type="hidden" name="action" value="firstname">
           <br>
           <label for="lastname" class="font-weight-bold login-input-label">Change last name</label>
-          <input type="text" name="lastname" value="" class="login-input">
+          <input type="text" name="lastname" value="<?php echo $currentLastName ?>" class="login-input">
           <input type="hidden" name="action" value="lastname">
-          <!-- <br>
-          <label for="username" class="font-weight-bold login-input-label">Change Username</label>
-          <input type="text" name="username" value="" class="login-input"> -->
           <br>
           <label for="email" class="font-weight-bold login-input-label">Change Email</label>
-          <input type="email" name="email" value="" class="login-input">
+          <input type="email" name="email" value="<?php echo $currentEmail ?>" class="login-input">
           <input type="hidden" name="action" value="email">
           <br><br>
-          <!-- <label for="password" class="font-weight-bold login-input-label">Change Password</label>
+          <label for="password" class="font-weight-bold login-input-label">Change Password</label>
           <br>
-          Current Password <input type="password" name="current-password" value="" class="login-input">
+          Current Password <input type="password" name="current-password" value="" class="login-input" placeholder="**********">
           New Password <input type="password" name="new-password" value="<?php echo $passError; ?>" class="login-input">
-          <input type="hidden" name="action" value="password"> -->
-          <br>
+          <input type="hidden" name="action" value="password">
+          <br><br>
           <label for="biography" class="font-weight-bold login-input-label">Change biography</label>
-          <!-- <input type="text" name="biography" value="" class="login-input"> -->
-          <textarea name="biography" rows="8" cols="80"></textarea>
+          <input type="text" name="biography" value="<?php echo $currentBiography; ?>">
           <input type="hidden" name="action" value="bio">
           <br>
           <label for="country" class="font-weight-bold login-input-label">Change Country</label>
-          <input type="text" name="country" value="" class="login-input">
+          <input type="text" name="country" value="<?php echo $currentCountry; ?>" class="login-input">
           <input type="hidden" name="action" value="country">
           <br>
           <label for="birthdate" class="font-weight-bold login-input-label">Change Birthdate</label>
-          <input type="date" name="birthdate" value="" class="login-input">
+          <input type="date" name="birthdate" value="<?php echo $currentBirthdate; ?>" class="login-input">
           <input type="hidden" name="action" value="birthdate">
           <br>
-          <label for="gender" class="font-weight-bold login-input-label">Set Gender</label>
+          <!-- <label for="gender" class="font-weight-bold login-input-label">Set Gender</label>
           <input type="radio" name="gender" value="Male" class="login-input"> Male
           <input type="hidden" name="action" value="gender">
           <input type="radio" name="gender" value="Female" class="login-input"> Female
           <input type="hidden" name="action" value="gender">
           <input type="radio" name="gender" value="Other" class="login-input"> Other
-          <input type="hidden" name="action" value="gender">
+          <input type="hidden" name="action" value="gender"> -->
           <!-- <br>
           <label for="file" class="font-weight-bold login-input-label">Change Profile photo</label>
           <input type="file" class="form-control add-input" name="fileToUpload" id="fileToUpload"> -->
           <br><br>
-          <input type="submit" name="" class="btn btn-light" value="Submit Changes">
+          <input type="submit" name="action" class="btn btn-light" value="Submit Changes">
           <br><br>
-          <?php
-
-          // display confirmation or fail messages when the user updates his/her account information
-          if(!empty($_SESSION['message-success'])) {
-            echo "<p><strong style='color: green;'>Success:</strong> " . $_SESSION['message-success'];
-            $_SESSION['message-success'] = "";
-            $_SESSION['errors'] = array();
-          }
-          if(!empty($_SESSION['message-fail'])) {
-            echo "<p><strong style='color: red;'>Fail:</strong> " . $_SESSION['message-fail'];
-            $_SESSION['message-fail'] = "";
-            $_SESSION['errors'] = array();
-          }
-
-          // display error messages, if any.
-          if(isset($_SESSION['errors'])) {
-            foreach($_SESSION['errors'] as $error) {
-              echo "<p><strong style='color: red;'>Error:</strong> " . $error . "</p>" . " ";
-              $_SESSION['errors'] = array();
-            }
-          }
-
-          ?>
         </div>
       </div>
     </form>
+
+    <form class="" action="./delete-tweet.php" method="post">
+      <h3>Delete tweets</h3>
+      <?php foreach(fetch_all($show_tweets) as $tweet): ?>
+        <input type="checkbox" name="tweet" value="<?php echo $tweet['id']; ?>"><label class="form__label--margin"><?php echo $tweet['tweet']; ?></label>
+      <?php endforeach; ?>
+      <br><br>
+      <select class="" name="tweet_id">
+        <?php foreach(fetch_all($show_tweets) as $tweet): ?>
+        <option value="<?php echo $tweet['id']; ?>"><?php echo $tweet['tweet']; ?></option>
+        <?php endforeach; ?>
+      </select>
+      <br><br>
+      <input type="submit" name="action" value="delete-tweet" onclick="return confirm('Are you sure you want to delete this item?');">
+    </form>
+    <?php
+
+    // display confirmation or fail messages when the user updates his/her account information
+    if(!empty($_SESSION['message-success'])) {
+      echo "<p><strong style='color: green;'>Success:</strong> " . $_SESSION['message-success'];
+      // $_SESSION['message-success'] = "";
+      // $_SESSION['errors'] = array();
+    }
+    if(!empty($_SESSION['message-fail'])) {
+      echo "<p><strong style='color: red;'>Fail:</strong> " . $_SESSION['message-fail'];
+      $_SESSION['message-fail'] = "";
+      // $_SESSION['errors'] = array();
+    }
+
+    // display error messages, if any.
+    if(isset($_SESSION['errors'])) {
+      foreach($_SESSION['errors'] as $error) {
+        echo "<p><strong style='color: red;'>Error:</strong> " . $error . "</p>" . " ";
+        // $_SESSION['errors'] = array();
+      }
+    }
+
+    ?>
   </body>
 </html>
