@@ -1,8 +1,11 @@
 <?php
 
 // to do:
-//     - delete id value, because faves.id should be set to auto increment
+//     - change user_id to logged in user id
 
 require_once('../connect.php'); 
+include_once('../queries.php');
 
-run_mysql_query('INSERT INTO faves (tweet_id, users_id, id) VALUES (' . $_POST['id'] .', 1, 2)');
+if (!fetch_record($check_faves . $_POST['id'])) {
+    run_mysql_query('INSERT INTO faves (tweet_id, user_id) VALUES (' . $_POST['id'] .', 1)');
+}
