@@ -1,0 +1,82 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+form {
+  position: relative;
+}
+
+body {
+  height: 100vh;
+  background: #00d2ff;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: .9rem;
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.7rem;
+  padding-top: 20px;
+  letter-spacing: .7px;
+  margin-bottom: 20px;
+}
+
+.container {
+  width: 350px;
+  height: 330px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 200px auto 0 auto;
+  background: #fff;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.login-input {
+  padding: 15px 5px;
+  margin-bottom: 15px;
+  width: 200px;
+  background: none;
+  border: none;
+  border-bottom: 1px solid #f4f4f4;
+  /* border-image-slice: 1; */
+  font-size: .8rem;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  border-image-slice: 1;
+}
+
+  .login-input:focus {
+    border-image: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+    border-image-slice: 1;
+  }
+
+.btn {
+  background-image: #00d2ff;  /* fallback for old browsers */
+  background-image: -webkit-linear-gradient(to left, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: linear-gradient(to left, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  padding: 10px 50px;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  text-transform: uppercase;
+  color: #fff;
+  border-radius: 25px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+  .btn:hover {
+    background-image: #00d2ff;  /* fallback for old browsers */
+    background-image: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+    background-image: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+p {
+  font-size: .8rem;
+  margin-bottom: 8px;
+}

@@ -1,0 +1,202 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f4f4f4;
+}
+
+.tweet-container {
+  width: 300px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  padding: 20px 15px;
+  overflow: hidden;
+  clear: both;
+}
+
+.tweet-userimg {
+  width: 60px;
+  height: 60px;
+  border-radius: 4px;
+  float: left;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.user-info {
+  position: relative;
+  display: block;
+  clear: both;
+}
+
+.tweet {
+  position: relative;
+  display: block;
+  clear: both;
+}
+
+.tweet__img {
+  width: 100%;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+/* .fullname {
+  position: absolute;
+  left: 120px;
+  top: -20px;
+} */
+
+.tweet__name {
+  list-style: none;
+  position: absolute;
+  left: 30px;
+  top: -20px;
+  float: left;
+  text-align: left;
+}
+
+#fullname {
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+#username {
+  font-size: .8rem;
+  color: #717171;
+  font-weight: 300;
+}
+
+.tweet__content {
+  padding-top: 15px;
+  text-align: left;
+  font-size: .85rem;
+  font-weight: 300;
+  color: #717171;
+}
+
+.tweet__content::before {
+  display: block;
+  content: '';
+  width: 290px;
+  height: 1px;
+  background-color: #f4f4f4;
+  margin-bottom: 8px;
+}
+
+.tweet-post-container {
+  width: 500px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  padding: 10px 15px;
+  overflow: hidden;
+  clear: both;
+  position: relative;
+}
+
+.tweet-post-input {
+  padding: 12px 10px;
+  width: 450px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #f4f4f4;
+  font-family: 'Poppins', sans-serif;
+  font-size: .8rem;
+}
+
+h4 {
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+/* PROFILE BLOCK */
+
+.profile-block {
+  width: 300px;
+  border-radius: 10px;
+  margin: 0 auto;
+  background: #fff;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  padding: 20px 0 0 0;
+  overflow: hidden;
+  clear: both;
+  text-align: center;
+}
+
+  .profile-block__image {
+    text-align: center;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-block__name {
+    text-transform: uppercase;
+    font-size: .9rem;
+    margin-bottom: 0;
+    margin-top: 0;
+    letter-spacing: .3px;
+  }
+
+  .profile-block__username {
+    margin-top: 0;
+    font-size: .8rem;
+    color: #717171;
+    font-weight: 300;
+  }
+
+  .profile-block__bio {
+    font-size: .8rem;
+    color: #717171;
+    font-weight: 300;
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .profile-block__stats::before {
+    display: block;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #f4f4f4;
+  }
+
+  /* .profile-block__stats::after {
+    display: block;
+    content: '';
+    height: 1px;
+    background-color: #f4f4f4;
+    margin: 8px 0;
+  } */
+
+  .profile-block__stats--tweets,
+  .profile-block__stats--following
+   {
+    width: 90px;
+    display: inline-block;
+    /* float: left; */
+    border-right: 1px solid #f4f4f4;
+  }
+
+  .profile-block__stats--followers {
+    width: 90px;
+    display: inline-block;
+  }
+
+  .profile-block__stats p {
+    font-weight: 700;
+    margin: 8px 0 0 0;
+  }
+
+  .profile-block__stats h3 {
+    font-size: .75rem;
+    color: #717171;
+    font-weight: 400;
+    margin: 0 0 8px 0;
+  }
+
+.at {
+  font-size: .7rem;
+  font-weight: 300;
+}

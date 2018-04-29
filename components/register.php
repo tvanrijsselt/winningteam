@@ -3,6 +3,13 @@
   require_once('../connect.php');
   session_start();
 
+  $firstNameError = "First Name";
+  $lastNameError = "Last Name";
+  $emailError = "Email";
+  $usernameError = "Username";
+  $passError = "Password";
+  $passCheckError = "Confirm password";
+
   // check if the user is already logged in, then redirect straight to account. otherwise stay on the register page.
   if(isset($_SESSION['username']) && isset($_SESSION['password'])) {
     $username = $_SESSION['username'];
@@ -64,7 +71,7 @@
         $passError = "Password is required.";
       } else {
         if($_POST['password'] != $_POST['passwordCheck']) {
-          $passError = "Passwords do not match.";
+          $passCheckError = "Passwords do not match.";
         } else {
           $encrypted_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -77,10 +84,10 @@
   $query = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('{$firstname}', '{$lastname}', '{$username}', '{$email}', '{$encrypted_password}')";
 
   if(run_mysql_query($query)) {
-    // $_SESSION['register-message'] = "Registration successful!";
+    $_SESSION['register-message'] = "Registration successful!";
     $_SESSION['username'] = $username;
     $_SESSION['password'] = $password;
-    require_once('login.php');
+    // require_once('login.php');
     // $firstname = "";
     // $lastname = "";
     // $username = "";
@@ -97,46 +104,42 @@
   <head>
     <meta charset="utf-8">
     <title>Twitter</title>
+    <link rel="stylesheet" href="./styles/register.css">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
   </head>
   <body>
 
-    <!-- Registration form -->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-      <div class="form-group row justify-content-center">
-        <div class="col">
-          <br>
-          Register
-          <br><br>
-          <!-- to ensure that the values are not erased when a user makes a mistake, echo the user's input in the value attribute -->
-          <label for="firstname" class="font-weight-bold register-input-label">First Name</label>
-          <input type="text" name="firstname" value="<?php echo $_POST['firstname']; ?>" class="register-input" maxlength="50" autofocus> <span>* <?php echo $firstNameError; ?></span>
-          <br>
-          <label for="lastname" class="font-weight-bold register-input-label">Last Name</label>
-          <input type="text" name="lastname" value="<?php echo $_POST['lastname']; ?>" class="register-input" maxlength="50"> <span>* <?php echo $lastNameError; ?></span>
-          <br>
-          <label for="username" class="font-weight-bold register-input-label">Username</label>
-          <input type="text" name="username" value="<?php echo $_POST['username']; ?>" class="register-input" maxlength="15"> <span>* <?php echo $usernameError; ?></span>
-          <br>
-          <label for="email" class="font-weight-bold register-input-label">Email</label>
-          <input type="text" name="email" value="<?php echo $_POST['email']; ?>" class="register-input"> <span>* <?php echo $emailError; ?></span>
-          <br>
-          <label for="password" class="font-weight-bold register-input-label">Password</label>
-          <input type="password" name="password" value="" class="register-input"> <span>* <?php echo $passError; ?></span>
-          <br>
-          <label for="passwordCheck" class="font-weight-bold register-input-label">Password repeat</label>
-          <input type="password" name="passwordCheck" value="" class="register-input">
-          <br><br>
-          <input type="submit" name="register-user-submit" class="btn btn-light" value="Register">
-          <br><br>
-          <?php
-
-          echo $_SESSION['register-message'];
-          // reset the registration message on refresh
-          $_SESSION['register-message'] = "";
-
-          ?>
-        </div>
-      </div>
-    </form>
+    <div class="container">
+      <!-- Registration form -->
+      <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+            <br>
+            <h3>Register</h3>
+            <p><?php echo $_SESSION['register-message']; ?></p>
+            <!-- // reset the registration message on refresh -->
+            <?php $_SESSION['register-message'] = ""; ?>
+            <br>
+            <!-- to ensure that the values are not erased when a user makes a mistake, echo the user's input in the value attribute -->
+            <!-- <label for="firstname" class="font-weight-bold register-input-label">First Name</label> -->
+            <input type="text" name="firstname" placeholder="<?php echo $firstNameError ?>" value="<?php echo $firstname; ?>" class="register-input" maxlength="50" autofocus>
+            <br>
+            <!-- <label for="lastname" class="font-weight-bold register-input-label">Last Name</label> -->
+            <input type="text" name="lastname" placeholder="<?php echo $lastNameError ?>" value="<?php echo $lastname; ?>" class="register-input" maxlength="50">
+            <br>
+            <!-- <label for="username" class="font-weight-bold register-input-label">Username</label> -->
+            <input type="text" name="username" placeholder="<?php echo $usernameError ?>" value="<?php echo $username; ?>" class="register-input" maxlength="15">
+            <br>
+            <!-- <label for="email" class="font-weight-bold register-input-label">Email</label> -->
+            <input type="text" name="email" placeholder="<?php echo $emailError ?>" value="<?php echo $_POST['email']; ?>" class="register-input">
+            <br>
+            <!-- <label for="password" class="font-weight-bold register-input-label">Password</label> -->
+            <input type="password" name="password" placeholder="<?php echo $passError ?>" value="" class="register-input">
+            <br>
+            <!-- <label for="passwordCheck" class="font-weight-bold register-input-label">Password repeat</label> -->
+            <input type="password" name="passwordCheck" placeholder="<?php echo $passCheckError ?>" value="" class="register-input">
+            <br><br>
+            <input type="submit" name="register-user-submit" class="btn btn-light" value="Register">
+            <p>Already have an account? <a href="./login.php">Log In</a>.</p>
+      </form>
+    </div>
   </body>
 </html>

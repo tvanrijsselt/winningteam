@@ -1,0 +1,49 @@
+body {
+  text-align: center;
+}
+
+.account__submit-button {
+  padding: 5px 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: .7rem;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  background-color: #f6f7f9;
+  border: 1px solid #DADFE2;
+  color: #4B4F56;
+  cursor: pointer;
+  box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+  .account__submit-button:hover {
+    background-color: #E9EBEE;
+  }
+
+label {
+  font-size: .8rem;
+  display: inline-block;
+  width: 150px;
+  text-align: right;
+}
+
+  .label__delete-tweet {
+    display: inline;
+    text-align: center;
+    width: 100%;
+  }
+
+.account__change-input {
+  padding: 8px 10px;
+  width: 200px;
+  margin: 10px;
+  border-radius: 8px;
+  border: 1px solid #f4f4f4;
+  font-family: 'Poppins', sans-serif;
+  font-size: .75rem;
+  box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+  color: #717171;
+}
+
+h2 {
+  margin-top: 80px;
+}
