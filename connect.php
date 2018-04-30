@@ -2,7 +2,6 @@
 /*--------------------BEGINNING OF THE CONNECTION PROCESS------------------*/
 //define constants for db_host, db_user, db_pass, and db_database
 //adjust the values below to match your database settings
-
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root'); //make sure the user is correct
 define('DB_PASS', 'root'); //make sure it is the right password
