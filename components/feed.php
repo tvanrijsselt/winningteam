@@ -8,129 +8,118 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
-<style>
-    img {
-        width: 50%;
-        height: auto;
-    }
-
-    .faves {
-        display: none;
-        color: red;
-    }
-
-    .followings {
-        display: none;
-    }
-    
-</style>
+<link rel='stylesheet' href='feed_style.css' />
 
 </head>
 
 <body>
+<!-- include navbar on feed -->
 <?php include_once('navbar.php'); ?>
 
-<div class="container" style="margin-top: 50px">
-    <!-- button to show only favorite tweets or all tweets -->
-    <button id='feed' onclick='showFeed()'>Show all tweets</button>
-
-    <button id='feed_faves' onclick='feedFaves()'>Show favorite tweets</button>
-
-    <button id='feed_followings' onclick='feedFollowings()'>Show tweets of people you follow</button>
+<div class="container">
+    <div class='feed_buttons'>
+        <!-- button to show all tweets -->
+        <button id='feed' onclick='showFeed()'>Show all tweets</button>
+        <!-- button to show favorite tweets -->
+        <button id='feed_faves' onclick='feedFaves()'>Show favorite tweets</button>
+        <!-- button to show tweets of people you follow -->
+        <button id='feed_followings' onclick='feedFollowings()'>Show tweets of people you follow</button>
+    </div>
 
     <!-- feed for all tweets-->
     <div class='tweets'>
         <?php foreach ($tweets as $post): ?>
             <div class='tweet'>
                 <!-- display user -->
-                <p><a href="#" onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>><?php echo $post['firstname'] . ' ' . $post['lastname']; ?></a></p>
-                <!-- only display picture if one has been uploaded -->
-                <?php if ($post['picture'] != ''): ?>
-                    <img src='<?php echo $post['picture']; ?>'/>
-                <?php endif; ?>
-                <!-- display tweet -->
-                <p><?php echo $post['tweet']; ?></p>
+                <?php include('user.php'); ?>
                 <!-- favorite button, display only if tweet not in faves -->
-                <?php if (!fetch_record($check_faves . $post['id'])): ?>
-                    <button onclick=<?php echo "favorite(" . $post['id'] . "," . $post['userid'] . ")";?>>Add to favorites</button>
-                <?php endif;?>
+                <?php include('fav_button.php'); ?>
+                <!-- button to open reply form -->
+                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
             </div>
+            
         <?php endforeach; ?>
     </div> <!-- end tweets div -->
 
     <!-- div for faves -->
     <div class='faves'>
-        <?php foreach ($faves as $fav): ?>
-            <div class='fav' id=<?php echo "fav" . $fav['id']; ?>>
+        <?php foreach ($faves as $post): ?>
+            <div class='tweet' id=<?php echo "fav" . $post['id']; ?>>
                 <!-- display user -->
-                <p><?php echo $fav['firstname'] . ' ' . $fav['lastname']; ?></p>
-                <!-- only display picture if one has been uploaded -->
-                <?php if ($fav['picture'] != ''): ?>
-                    <img src='<?php echo $fav['picture']; ?>'/>
-                <?php endif; ?>
-                <!-- display tweet -->
-                <p><?php echo $fav['tweet']; ?></p>
+                <?php include('user.php'); ?>
                 <!-- unfavorite button -->
-                <button id="unfavorite" onclick=<?php echo "unfavorite(" . $fav['id'] . ")";?>>Remove from favorite</button>
+                <button id="unfavorite" onclick=<?php echo "unfavorite(" . $post['id'] . ")";?>>Remove from favorite</button>
+                <!-- button to open reply form -->
+                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
             </div>
         <?php endforeach; ?>
     </div> <!-- end faves div -->
 
     <!-- div for followings -->
     <div class="followings">
-        <?php foreach($followings as $follow): ?>
-            <div class='follow'>
+        <?php foreach($followings as $post): ?>
+            <div class='tweet'>
                 <!-- display user -->
-                <p><?php echo $follow['firstname'] . ' ' . $follow['lastname'];?></p>
-                <!-- only display picture if one has been uploaded -->
-                <?php if ($follow['picture'] != ''): ?>
-                    <img src='<?php echo $follow['picture']; ?>'/>
-                <?php endif; ?>
-                <!-- display tweet -->
-                <p><?php echo $follow['tweet']; ?></p>
+                <?php include('user.php'); ?>
+                <!-- favorite button, display only if tweet not in faves -->
+                <?php include('fav_button.php'); ?>
+                <!-- button to open reply form -->
+                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
             </div>
         <?php endforeach; ?>
     </div> <!-- end followings div -->
 </div> <!-- end container div -->
 
-<!-- popup with user's tweet 
-    to fix: now it shows all tweets -> change to just one user's tweets (probably with $.post) 
--->
-<div id="user_tweets" class="modal">
-    
+<!-- popup with tweet and all replies -->
+<div id='show_tweet' class='modal'>
 </div>
 
+<!-- popup with user's tweet -->
+<div id="user_tweets" class="modal">
+</div>
+
+<div id='reply' class='modal'></div>
 
 <script>
     $(document).ready(function() {
-      }); // end document ready  
-        
-        //
+        $('.faves').hide();
+        $('.followings').hide();
+    }); // end document ready  
+
+        // display all tweets
         function showFeed() {
-            $(".tweets").css('display', 'initial');
-            $('.followings').css('display', 'none');
-            $('.faves').css('display', 'none');
-        }
+            $(".tweets").show();
+            $('.followings').hide();
+            $('.faves').hide();
+        } //end showFeed function
       
         // display faves
         function feedFaves() {
-                $(".tweets").css('display', 'none');
-                $('.followings').css('display', 'none');
-                $('.faves').css('display', 'initial');  
+                $(".tweets").hide();
+                $('.followings').hide();
+                $('.faves').show();  
         }; // end feedFaves function
 
         // display followings
         function feedFollowings() {
-                $(".faves").css('display', 'none');
-                $(".tweets").css('display', 'none');
-                $('.followings').css('display', 'initial');
+                $(".faves").hide();
+                $(".tweets").hide();
+                $('.followings').show();
         }; // end feedFollowings function
 
-        // show user's tweets
-        function showUserTweets(id) {
-            $.post('user_tweets.php', {
+        // show tweet + replies and everything
+        function showTweet(id) {
+            $.post('show_tweet.php', {
                 id: id
+            }, (data, status) => {
+                $('#show_tweet').html(data).modal();
+            })
+        }; //end showTweet function
+
+        // show user's tweets
+        function showUserTweets(userid) {
+            $.post('user_tweets.php', {
+                userid: userid
             }, (data,status) => {
                 $("#user_tweets").html(data).modal();
             })
@@ -144,9 +133,9 @@
             }, (data,status) => {
                 //reload faves and tweets without reloading whole page
                 $('.faves').load('feed.php .faves');
-                $('.tweets').load('feed.php .tweet'); 
-                // remove favorite button (mostly for the modal) 
-                $('#fav_button' + id).remove(); 
+                $('.tweets').load('feed.php .tweets'); 
+                $('.followings').load('feed.php .followings');  
+                
             })
         }; // end favorite
 
@@ -158,9 +147,11 @@
                 // remove from DOM
                 $("#fav"+id).remove();
                 // reload tweets
-                $('.tweets').load('feed.php .tweet');
+                $('.tweets').load('feed.php .tweets');
+                $('.followings').load('feed.php .followings')                
             })
         }; // end unfavorite
+
 
         // follow a user
         function follow(userid) {
@@ -169,18 +160,31 @@
             }, (data,status) => {
                 //remove follow button from modal
                 $("#follow").remove();
+                //reload followings feed
                 $('.followings').load('feed.php .followings');
             })
         };
 
+        // unfollow a user
         function unfollow(id) {
             $.post('unfollow.php', {
                 id: id
             }, (data, status) => {
+                //remove button
                 $('#unfollow').remove();
+                //reload followings feed
                 $('.followings').load('feed.php .followings');
             })
         }
+
+        // open reply form
+        function create_reply(id) {
+            $.post('reply.php', {
+                id: id
+            }, (data,status) => {
+                $('#reply').html(data).modal();
+            })
+        };
     
 </script>
 

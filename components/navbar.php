@@ -11,6 +11,7 @@
     <head>
     </head>
         <style>
+            
             ul {
                 list-style-type: none;
                 margin: 0;
@@ -52,11 +53,11 @@
 
     <body>
         <ul class='navbar'>
-            <li><a href="#">Twitter</a></li>
+            <li><a href="feed.php">Twitter</a></li>
             <li class='user' style="float: right">
-                <a href="#">User</a>
+                <a href="account.php">User</a>
                 <div class='dropdown'>
-                    <a href="#">Account</a>
+                    <a href="account.php">Account</a>
                     <a href="#">Logout</a>
                 </div>
             </li>
