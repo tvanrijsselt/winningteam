@@ -55,7 +55,7 @@
       $userCheck = fetch_record($query);
 
       if($userCheck) {
-        $usernameError = "User already exists, try a new name please.";
+        $usernameError = "User already exists, try a new name.";
       } else {
         $username = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['username']))));
       }
