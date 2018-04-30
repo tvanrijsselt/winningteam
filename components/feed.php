@@ -8,7 +8,83 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-<link rel='stylesheet' href='feed_style.css' />
+<!-- <link rel='stylesheet' type='text/css' href='feed_style.css' /> -->
+<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+
+
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: #f4f4f4;
+    }
+    
+    .container {
+        width: 50%;
+        margin: 50px auto;  
+    }
+
+    .feed_buttons {
+        width: 100%;
+        display: grid;
+        grid-template: 1fr / 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+
+    .feed_buttons button {
+        background-image: #00d2ff;  /* fallback for old browsers */
+        background-image: -webkit-linear-gradient(to left, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+        background-image: linear-gradient(to left, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        padding: 10px ;
+        font-family: 'Poppins', sans-serif;
+        border: none;
+        text-transform: uppercase;
+        color: #fff;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .feed_buttons button:hover {
+        background-image: #00d2ff;  /* fallback for old browsers */
+        background-image: -webkit-linear-gradient(to right, #3a7bd5, #00d2ff);  /* Chrome 10-25, Safari 5.1-6 */
+        background-image: linear-gradient(to right, #3a7bd5, #00d2ff); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+
+    .feed_buttons button:focus {
+        opacity: 0.3;
+    }
+
+    .tweet {
+        width: 300px;
+        border-radius: 10px;
+        margin: 10px auto;
+        background: #fff;
+        box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+        padding: 20px 15px;
+        overflow: hidden;
+        clear: both;
+    }
+
+    .tweet_buttons {
+        background-color: white;
+        display: grid;
+        grid-template: 1fr / 1fr 1fr;
+    }
+
+    #create_reply {
+        padding: 5px 10px;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 2px;
+        border: none;
+        background-color: white;
+        color: #4B4F56;
+        cursor: pointer;
+    }
+
+    #create_reply:hover {
+        background-color: #E9EBEE;
+    }
+</style>
 
 </head>
 
@@ -19,11 +95,11 @@
 <div class="container">
     <div class='feed_buttons'>
         <!-- button to show all tweets -->
-        <button id='feed' onclick='showFeed()'>Show all tweets</button>
+        <button id='feed' onclick='showFeed()'>All tweets</button>
         <!-- button to show favorite tweets -->
-        <button id='feed_faves' onclick='feedFaves()'>Show favorite tweets</button>
+        <button id='feed_faves' onclick='feedFaves()'>Favorites</button>
         <!-- button to show tweets of people you follow -->
-        <button id='feed_followings' onclick='feedFollowings()'>Show tweets of people you follow</button>
+        <button id='feed_followings' onclick='feedFollowings()'>Following</button>
     </div>
 
     <!-- feed for all tweets-->
@@ -33,9 +109,14 @@
                 <!-- display user -->
                 <?php include('user.php'); ?>
                 <!-- favorite button, display only if tweet not in faves -->
-                <?php include('fav_button.php'); ?>
-                <!-- button to open reply form -->
-                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
+                <div class='tweet_buttons'>
+                    <?php include('fav_button.php'); ?>
+                    <!-- button to open reply form -->
+                    <button id="create_reply" 
+                        onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>
+                        <i class='fa fa-comment-o'></i> Reply
+                    </button>
+                </div>
             </div>
             
         <?php endforeach; ?>
@@ -48,9 +129,16 @@
                 <!-- display user -->
                 <?php include('user.php'); ?>
                 <!-- unfavorite button -->
-                <button id="unfavorite" onclick=<?php echo "unfavorite(" . $post['id'] . ")";?>>Remove from favorite</button>
-                <!-- button to open reply form -->
-                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
+                <div class='tweet_buttons'>
+                    <button id="unfavorite" onclick=<?php echo "unfavorite(" . $post['id'] . ")";?>>
+                        <i class="fa fa-check"></i> Unfavorite
+                    </button>
+                    <!-- button to open reply form -->
+                    <button id="create_reply" 
+                        onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>
+                        <i class='fa fa-comment-o'></i> Reply
+                    </button>
+                </div>
             </div>
         <?php endforeach; ?>
     </div> <!-- end faves div -->
@@ -62,9 +150,14 @@
                 <!-- display user -->
                 <?php include('user.php'); ?>
                 <!-- favorite button, display only if tweet not in faves -->
-                <?php include('fav_button.php'); ?>
-                <!-- button to open reply form -->
-                <button id="create_reply" onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>Reply</button>
+                <div class='tweet_buttons'>
+                    <?php include('fav_button.php'); ?>
+                    <!-- button to open reply form -->
+                    <button id="create_reply" 
+                        onclick=<?php echo 'create_reply(' . $post['id'] . ')'; ?>>
+                        <i class='fa fa-comment-o'></i> Reply
+                    </button>
+                </div>
             </div>
         <?php endforeach; ?>
     </div> <!-- end followings div -->
@@ -145,7 +238,7 @@
                 id: id
             }, (data,status) => {
                 // remove from DOM
-                $("#fav"+id).remove();
+                $("#fav"+id).remove();  
                 // reload tweets
                 $('.tweets').load('feed.php .tweets');
                 $('.followings').load('feed.php .followings')                

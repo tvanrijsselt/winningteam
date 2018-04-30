@@ -9,19 +9,18 @@
 
 <html>
     <head>
-    </head>
-        <style>
+    <style>
             
             ul {
                 list-style-type: none;
                 margin: 0;
                 padding: 0;
-                border-bottom: black solid 1px;
                 position: fixed;
                 top: 0;
                 left: 0;
                 width: 100%;
                 background-color: white;
+                box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
             }
 
             li {
@@ -32,7 +31,8 @@
                 display: block;
                 padding: 8px;
                 text-decoration: none;
-                color: black;
+                color: rgb(0, 128, 255);
+                font-weight: 600;
             }
 
             .dropdown {
@@ -40,22 +40,31 @@
                 position: absolute;
                 right: 0;
                 z-index: 1;
+                background-color: white;
             }
 
             .user:hover .dropdown {
                 display: block;
             }
 
-            .dropdown a:hover {
-                background-color: green;
+            .navbar a:hover {
+                background-color: rgb(0, 128, 255);
+                color: white;        
             }
+
         </style>
+
+        <?php include_once('../queries.php'); ?>
+    </head>
 
     <body>
         <ul class='navbar'>
-            <li><a href="feed.php">Twitter</a></li>
+            <li><a href="feed.php"><i class="fa fa-home fa-lg"></i></a></li>
             <li class='user' style="float: right">
-                <a href="account.php">User</a>
+                <a href="account.php">
+                    <i class='fa fa-user-circle-o fa-lg'></i>
+                    <?php echo $user_logged_in['firstname'] . ' ' . $user_logged_in['lastname']; ?>
+                </a>
                 <div class='dropdown'>
                     <a href="account.php">Account</a>
                     <a href="#">Logout</a>
