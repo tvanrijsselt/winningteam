@@ -105,6 +105,7 @@
           <input type="password" name="password" value="" class="login-input" placeholder="<?php echo $passError; ?>">
           <br><br>
           <input type="submit" name="" class="btn btn-light" value="Log In">
+          <p>No account yet? <a href="./register.php">Register here</a>.</p>
       </form>
     </div>
   </body>
