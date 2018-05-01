@@ -37,6 +37,7 @@
     
     <!-- display tweets -->
     <div class='user_tweets'>
+        <h3 style="text-align: center;"><?php echo '@' . $user_tweets[0]['username']; ?>'s Tweets</h3>
         <?php foreach ($user_tweets as $post): ?>
             
             <div class='tweet'>
