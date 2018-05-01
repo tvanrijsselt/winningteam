@@ -35,35 +35,27 @@
     header("Location: ./account.php");
   }
 
+  // Edit a tweet.
   if(isset($_POST['action']) && $_POST['action'] == 'edit_tweet_hidden') {
 
-    $errors = array();
+    $editTweetPhoto = $_POST['edit_tweet-photo'];
+    $editTweetText = $_POST['edit_tweet'];
 
-    if(count($errors) > 0) {
+    if(!empty($_POST['edit_tweet_submit'])) {
+      if(empty($editTweetText) && empty($editTweetPhoto)) {
+        header("Location: ./account.php");
+      }
+      elseif(empty($editTweetPhoto) && !empty($editTweetText)) {
+        $query = "UPDATE tweets SET tweet = '$editTweetText' WHERE tweets.id = {$_POST['tweet_id']}";
 
-      $_SESSION['errors'] = $errors;
-      header('Location: ./account.php');
-    } else {
-      $_SESSION['errors'] = array();
+        run_mysql_query($query);
+        header("Location: ./account.php");
+      }
+      elseif(empty($editTweetText) && !empty($editTweetPhoto)) {
+        $query = "UPDATE tweets SET picture = '$editTweetPhoto' WHERE tweets.id = {$_POST['tweet_id']}";
 
-      if(!empty($_POST['edit_tweet_submit'])) {
-
-        if(empty($_POST['edit_tweet-photo'])) {
-          $query = "UPDATE tweets SET tweet = '{$_POST['edit_tweet']}' WHERE tweets.id = {$_POST['tweet_id']}";
-
-          run_mysql_query($query);
-          header('Location: ./account.php');
-
-        } else {
-          $query = "UPDATE tweets SET picture = '{$_POST['edit_tweet-photo']}' WHERE tweets.id = {$_POST['tweet_id']}";
-
-          $query2 = "UPDATE tweets SET tweet = '{$_POST['edit_tweet']}' WHERE tweets.id = {$_POST['tweet_id']}";
-
-          run_mysql_query($query);
-          run_mysql_query($query2);
-
-          header('Location: ./account.php');
-        }
+        run_mysql_query($query);
+        header("Location: ./account.php");
       }
     }
   }
