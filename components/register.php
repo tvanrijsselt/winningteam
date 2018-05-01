@@ -87,11 +87,7 @@
     $_SESSION['register-message'] = "Registration successful!";
     $_SESSION['username'] = $username;
     $_SESSION['password'] = $password;
-    // require_once('login.php');
-    // $firstname = "";
-    // $lastname = "";
-    // $username = "";
-    // $email = "";
+    header("Location: ./feed.php");
   } else {
     $_SESSION['register-message'] = "Failed to register. Try again!";
   }

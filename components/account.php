@@ -413,7 +413,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <br><br><br>
 
-    <?php foreach(fetch_all("SELECT tweet, tweets.id, firstname, lastname, profile_pic, username, users.id, tweets.picture FROM tweets JOIN users ON tweets.user_id = users.id WHERE users.id = $userid") as $tweet): ?>
+    <!-- show tweets -->
+    <!-- <?php foreach(fetch_all("SELECT tweet, tweets.id, firstname, lastname, profile_pic, username, users.id, tweets.picture FROM tweets JOIN users ON tweets.user_id = users.id WHERE users.id = $userid") as $tweet): ?>
       <div class="tweet-container">
         <div class="user-info">
           <img src="<?php echo $tweet['profile_pic']?>" alt="" class="tweet-userimg">
@@ -428,7 +429,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
       </div>
       <br>
-    <?php endforeach; ?>
+    <?php endforeach; ?> -->
 
     <div class="tweet-post-container">
       <!-- <h4>Tweet something</h4> -->

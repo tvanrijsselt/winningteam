@@ -48,3 +48,9 @@ label {
 h2 {
   margin-top: 80px;
 }
+
+h2,
+h3,
+h4 {
+  color: #000;
+}
