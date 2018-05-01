@@ -5,9 +5,9 @@
 
   if(isset($_SESSION['username']) && isset($_SESSION['password'])) {
     session_destroy();
-    header ("Location: feed.php");
+    header ("Location: login.php");
   } else {
-    header ("Location: feed.php");
+    header ("Location: login.php");
   }
 
  ?>

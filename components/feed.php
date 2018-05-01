@@ -63,6 +63,19 @@ if(isset($_SESSION['username'])) {
 </head>
 
 <body>
+<?php 
+session_start();
+
+// check if a user is logged in, otherwise block account.php and redirect to the login page.
+if(isset($_SESSION['username']) && isset($_SESSION['password'])) {
+  $username = $_SESSION['username'];
+  $password = $_SESSION['password'];
+  $userid = $_SESSION['user-id'];
+} else {
+  header ("Location: login.php");
+}
+?>
+
 <!-- include navbar on feed -->
 <?php include_once('navbar.php'); ?>
 

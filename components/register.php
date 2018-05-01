@@ -14,7 +14,7 @@
   if(isset($_SESSION['username']) && isset($_SESSION['password'])) {
     $username = $_SESSION['username'];
     $password = $_SESSION['password'];
-    header("Location: account.php");
+    header("Location: feed.php");
   }
 
   // $firstname = $_POST['firstname'];

@@ -72,7 +72,7 @@
           $_SESSION['user-id'] = $userid;
           $_SESSION['username'] = $username;
           $_SESSION['password'] = $password;
-          header('Location: account.php');
+          header('Location: feed.php');
         } else {
           $_SESSION['login-message'] = "Password incorrect! Try again.";
         }
