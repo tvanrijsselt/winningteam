@@ -21,13 +21,13 @@
             <li><a href="feed.php"><i class="fa fa-home fa-lg"></i></a></li>
             <li class='user' style="float: right">
                 <a href="account.php">
-                    <i class='fa fa-user-circle-o fa-lg'></i>
-                    <img src="<?php echo fetch_record("SELECT profile_pic FROM users WHERE users.id = $userid")['profile_pic']; ?>" alt="" style="height: 30px; width: 30px; border-radius: 100%; position: absolute; top: 5px; right: 121px; margin-right: 0px;">
+                    <img src="<?php echo fetch_record("SELECT profile_pic FROM users WHERE users.id = $userid")['profile_pic']; ?>" 
+                        alt="" style="height: 30px; width: 30px; border-radius: 100%; float: left; margin: 0 4px 0 0;">
                     <?php echo $user_logged_in['firstname'] . ' ' . $user_logged_in['lastname']; ?>
                 </a>
                 <div class='dropdown'>
-                    <a href="account.php">Account</a>
-                    <a href="logout.php">Logout</a>
+                    <a href="account.php"><i class='fa fa-user-circle-o fa-lg'></i> Account</a>
+                    <a href="logout.php"><i class='fa fa-sign-out fa-lg'></i> Logout</a>
                 </div>
             </li>
         </ul>
