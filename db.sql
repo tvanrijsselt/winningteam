@@ -41,9 +41,9 @@ DEFAULT CHARACTER SET = utf8;
 -- Table `mydb`.`faves`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`faves` (
-  `id` INT(11) NOT NULL,
-  `tweet_id` VARCHAR(45) NULL,
-  `users_id` INT(11) NOT NULL,
+  `id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tweet_id` INT(11) NULL,
+  `user_id` INT(11) NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
   PRIMARY KEY (`id`, `users_id`),
