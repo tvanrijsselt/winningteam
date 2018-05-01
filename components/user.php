@@ -13,14 +13,14 @@
 
 
 <div class='user_and_tweet'>
-<a href="#" onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
+<a onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
     <img class='tweet-userimg' src=<?php if (isset($post['profile_pic'])) {echo $post['profile_pic'];} else {echo 'http://4.bp.blogspot.com/-zsbDeAUd8aY/US7F0ta5d9I/AAAAAAAAEKY/UL2AAhHj6J8/s1600/facebook-default-no-profile-pic.jpg';}; ?>>
 </a>
 <div class='user-info'>
-    <a href="#" onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
+    <a onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
         <span><?php echo $post['firstname'] . ' ' . $post['lastname']; ?></span><br>
     </a>
-    <a href="#" onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
+    <a onclick=<?php echo "showUserTweets(" . $post['userid'] .")";?>>
         <?php echo '@' . $post['username']; ?>
     </a>
     </div>
