@@ -462,7 +462,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
           <h3>Following</h3>
         </div>
         <div class="profile-block__stats--followers">
-          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings JOIN users ON followings.user_id = users.id WHERE followings.following_id = $userid;")['COUNT(followings.id)']; ?></p>
+          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings JOIN users ON followings.user_id = users.id WHERE followings.follower_id = $userid;")['COUNT(followings.id)']; ?></p>
           <h3>Followers</h3>
         </div>
       </div>
