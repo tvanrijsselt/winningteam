@@ -19,6 +19,46 @@ if(isset($_SESSION['username'])) {
 <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<style>
+    .tweet-post-container {
+        width: 75%;
+        border-radius: 10px;
+        margin: 10px auto;
+        background: #fff;
+        box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
+        padding: 10px 15px;
+    }
+
+    .tweet-post-input {
+        width: 100%;
+        font-family: 'Poppins', sans-serif;
+        font-size: 15px;
+    }
+
+    h4 {
+        text-transform: uppercase;
+        margin-bottom: 8px;
+        margin-top: 0px;
+        text-align: center;
+    }
+
+    .account__submit-button {
+        padding: 5px 10px;
+        font-family: 'Poppins', sans-serif;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        background-color: #f6f7f9;
+        border: 1px solid #DADFE2;
+        color: #4B4F56;
+        cursor: pointer;
+        box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.1);
+        float: right;
+        }
+
+        .account__submit-button:hover {
+            background-color: #E9EBEE;
+        }
+</style>
 
 </head>
 
@@ -44,6 +84,17 @@ if(isset($_SESSION['username'])) {
             $_SESSION['register-message'] = "";
         }
     ?>
+
+    <div class="tweet-post-container">
+      <!-- <h4>Tweet something</h4> -->
+      <form class="" action="./tweet-account-actions.php" method="post">
+        <h4>Tweet something</h4>
+        <textarea type="text" name="tweet" value="" class="tweet-post-input" placeholder="Post a new tweet"></textarea>
+        <input id="photo" type="text" name="photo" value="" placeholder="With a photo?" class="tweet-post-input">
+        <input type="hidden" name="action" value="post_tweet_feed">
+        <input class="account__submit-button" type="submit" name="post_tweet_submit" value="Post tweet">
+      </form>
+    </div>
 
     <!-- feed for all tweets-->
     <div class='tweets'>

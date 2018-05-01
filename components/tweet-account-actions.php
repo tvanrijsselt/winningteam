@@ -83,6 +83,22 @@
     }
   }
 
+  //post tweet from feed
+  if(isset($_POST['action']) && $_POST['action'] == 'post_tweet_feed') {
+
+    if(!empty($_POST['post_tweet_submit'])) {
+
+      if(empty($_POST['tweet'])) {
+        header('Location: ./feed.php');
+      } else {
+        $query = "INSERT INTO tweets (user_id, tweet, picture) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}')";
+
+        run_mysql_query($query);
+        header('Location: ./feed.php');
+      }
+    }
+  }
+
   // Edit photo //
   if(!empty($_POST['edit_photo_submit'])) {
 
