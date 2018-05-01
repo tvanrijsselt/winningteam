@@ -303,11 +303,11 @@
           <h3>Tweets</h3>
         </div>
         <div class="profile-block__stats--following">
-          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings WHERE followings.user_id = $userid;")['COUNT(followings.id)']; ?></p>
+          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings WHERE followings.follower_id = $userid;")['COUNT(followings.id)']; ?></p>
           <h3>Following</h3>
         </div>
         <div class="profile-block__stats--followers">
-          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings JOIN users ON followings.user_id = users.id WHERE followings.follower_id = $userid;")['COUNT(followings.id)']; ?></p>
+          <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings JOIN users ON followings.user_id = users.id WHERE followings.user_id = $userid;")['COUNT(followings.id)']; ?></p>
           <h3>Followers</h3>
         </div>
       </div>

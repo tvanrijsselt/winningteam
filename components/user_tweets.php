@@ -33,16 +33,16 @@
     <p id='bio'><?php echo '"' . $user_tweets[0]['bio'] . '"'; ?></p>
 </div>
 
-    <div class="profile-block__stats">
-        <div class="profile-block__stats--tweets">
+    <div class="statistics">
+        <div class="statistics--tweets">
           <p><?php echo fetch_record("SELECT COUNT(tweets.id) FROM tweets JOIN users ON tweets.user_id = users.id WHERE users.id = " . $user_tweets[0]['userid'] . ";")['COUNT(tweets.id)']; ?></p>
           <h3>Tweets</h3>
         </div>
-        <div class="profile-block__stats--following">
+        <div class="statistics--following">
           <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings WHERE followings.follower_id = " . $user_tweets[0]['userid'] . ";")['COUNT(followings.id)']; ?></p>
           <h3>Following</h3>
         </div>
-        <div class="profile-block__stats--followers">
+        <div class="statistics--followers">
           <p><?php echo fetch_record("SELECT COUNT(followings.id) FROM followings JOIN users ON followings.user_id = users.id WHERE followings.user_id = " . $user_tweets[0]['userid'] . ";")['COUNT(followings.id)']; ?></p>
           <h3>Followers</h3>
         </div>

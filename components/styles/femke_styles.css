@@ -322,7 +322,7 @@ textarea {
     box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
 }
 
-.profile-block__stats {
+.statistics {
     margin-top: 20px;
     height: 50px;
     display: grid;
@@ -333,20 +333,20 @@ textarea {
     border-radius: 5px;
 }
 
-.profile-block__stats--tweets {
+.statistics--tweets {
     border-right: 1px solid #f4f4f4;
 }
 
-.profile-block__stats--following {
+.statistics--following {
     border-right: 1px solid #f4f4f4;
 }
 
-  .profile-block__stats p {
+  .statistics p {
     font-weight: 700;
     margin: 8px 0 0 0;
   }
 
-  .profile-block__stats h3 {
+  .statistics h3 {
     font-size: .75rem;
     color: #717171;
     font-weight: 400;
