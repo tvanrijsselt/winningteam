@@ -9,50 +9,9 @@
 
 <html>
     <head>
-    <style>
-            
-            ul {
-                list-style-type: none;
-                margin: 0;
-                padding: 0;
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-            }
-
-            li {
-                float: left;
-            }
-
-            li a {
-                display: block;
-                padding: 8px;
-                text-decoration: none;
-                color: rgb(0, 128, 255);
-                font-weight: 600;
-            }
-
-            .dropdown {
-                display: none;
-                position: absolute;
-                right: 0;
-                z-index: 1;
-                background-color: white;
-            }
-
-            .user:hover .dropdown {
-                display: block;
-            }
-
-            .navbar a:hover {
-                background-color: rgb(0, 128, 255);
-                color: white;        
-            }
-
-        </style>
+        <link rel='stylesheet' type='text/css' href='styles/femke_styles.css' />
+        <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <?php include_once('../queries.php'); ?>
     </head>

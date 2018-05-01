@@ -2,58 +2,14 @@
 <html>
 
 <head>
-<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='styles/femke_styles.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <?php require_once('../connect.php');?>
+    <?php include_once('../queries.php');?>
 
-    <style>
-        #user_img {
-            width: 50%;
-            min-height: 150px;
-            border-radius: 10px;
-            float: left;
-            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-        }
-
-        .follow_btn button{
-            background-color: white;
-            color: #E0E0E0;
-            padding: 10px;
-            font-family: 'Poppins', sans-serif;
-            border: 1px solid #E0E0E0;
-            text-transform: uppercase;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 5px 0;
-        }
-
-        .follow_btn button:hover {
-            color: white;
-            background-color: #E0E0E0;
-        }
-
-        .user__info {
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .user__info h2 {
-            margin: 0px;
-        }
-
-        #bio {
-            color: #717171;
-            font-size: 0.9rem;
-        }
-    </style>
-
-
-<?php require_once('../connect.php');?>
-<?php include_once('../queries.php');?>
-
-<?php
-$user_tweets = fetch_all($select_tweets . ' WHERE user_id =' . $_POST['userid'] . ' ORDER BY tweets.id DESC');
-?>
+    <?php $user_tweets = fetch_all($select_tweets . ' WHERE user_id =' . $_POST['userid'] . ' ORDER BY tweets.id DESC');?>
 
 </head>
 
