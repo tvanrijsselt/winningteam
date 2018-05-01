@@ -267,16 +267,13 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="./styles/tweet.css">
     <link rel="stylesheet" href="./styles/account.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
   <body>
 
-    <h2>Welcome to the admin page, <?php echo $username; ?>!</h2>
-    <form class="" action="logout.php" method="post">
-      <input class="account__submit-button" type="submit" name="edit_photo" value="Log Out">
-    </form>
-    <br>
+    <?php include_once('navbar.php'); ?>
 
-    <h3>Account Settings</h3>
+    <h2>Welcome to the admin page, <?php echo $username; ?>!</h2>
 <!--
     <?php
 

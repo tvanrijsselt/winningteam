@@ -143,19 +143,6 @@ if(isset($_SESSION['username'])) {
 <!-- include navbar on feed -->
 <?php include_once('navbar.php'); ?>
 
-<ul class='navbar'>
-            <li><a href="feed.php"><i class="fa fa-home fa-lg"></i></a></li>
-            <li class='user' style="float: right">
-                <a href="account.php">
-                    <i class='fa fa-user-circle-o fa-lg'></i>
-                    <?php echo $user_logged_in['firstname'] . ' ' . $user_logged_in['lastname']; ?>
-                </a>
-                <div class='dropdown'>
-                    <a href="account.php">Account</a>
-                    <a href="logout.php">Logout</a>
-                </div>
-            </li>
-        </ul>
 <div class="container">
     <div class='feed_buttons'>
         <!-- button to show all tweets -->
