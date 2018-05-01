@@ -18,23 +18,23 @@
       }
 
       if(count($errors) > 0) {
-        $_SESSION['errors'] = $errors;
+        $_SESSION['errors-pass'] = $errors;
         header("Location: account.php");
       } else {
         $encrypted_password = password_hash($newPassword, PASSWORD_DEFAULT);
-        // $_SESSION['errors'] = array();
+        $_SESSION['errors-pass'] = array();
 
         // $password = escape_this_string($_POST['current-password']);
         $queryPass = "UPDATE users SET password = '$encrypted_password' WHERE users.id = $userid";
 
         if(run_mysql_query($queryPass))
         {
-          $_SESSION['message-success'] = "Password has been updated correctly!";
+          $_SESSION['message-password'] = "Password has been updated correctly!";
           header("Location: account.php");
         }
         else
         {
-          $_SESSION['message-fail'] = "Password has been updated correctly!";
+          $_SESSION['message-password'] = "Password has been updated correctly!";
           header("Location: account.php");
         }
       }
@@ -43,7 +43,7 @@
       $errors[] = "Your password is not correct.";
 
       if(count($errors) > 0) {
-        $_SESSION['errors'] = $errors;
+        $_SESSION['errors-pass'] = $errors;
         header("Location: account.php");
       }
     }
