@@ -2,74 +2,9 @@
 
 <html>
 <head>
-    <style>
-        #favorite, #unfavorite {
-            padding: 5px 10px;
-            font-family: 'Poppins', sans-serif;
-            border-radius: 2px;
-            border: none;
-            background-color: white;
-            color: #4B4F56;
-            cursor: pointer;
-        }
-        #favorite:hover {
-            background-color: #E9EBEE;
-        }
-        #unfavorite:hover {
-            background-color: #E9EBEE;
-        }
-
-        .user_and_reply {
-            width: 80%;
-            margin: 5px auto;
-            background: #f4f4f4;
-            border-radius: 10px;
-            padding: 10px;
-        }
-
-        .reply-userimg {
-            height: 40px;
-            width: 40px;
-            border-radius: 50%;
-            float: left;
-            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-        }
-
-        .reply-user-info {
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .reply-user-info span {
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        .reply-user-info a {
-            font-size: .75rem;
-            color: #717171;
-            font-weight: 300;
-            text-decoration: none;
-        }
-
-        .reply__content {
-            padding-top: 15px;
-            text-align: left;
-            font-weight: 300;
-            color: #717171;
-        }
-
-        .reply__content img {
-            width: 100%;
-            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-            margin-top: 10px;
-        }
-        
-        .reply__content div {
-            margin-top: 10px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='styles/femke_styles.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 

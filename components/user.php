@@ -2,69 +2,10 @@
 <html>
 
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='styles/femke_styles.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <style>
-        .tweet-userimg {
-            width: 60px;
-            height: 60px;
-            border-radius: 4px;
-            float: left;
-            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-        }
-
-        .user-info {
-            display: inline-block;
-            margin-left: 10px;
-        }
-
-        .user-info span {
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .user-info a {
-            font-size: .8rem;
-            color: #717171;
-            font-weight: 300;
-            text-decoration: none;
-        }
-
-        .tweet__content {
-            padding-top: 15px;
-            text-align: left;
-            font-weight: 300;
-            color: #717171;
-        }
-
-        .tweet__content::before {
-            display: block;
-            content: '';
-            width: 100%;
-            height: 1px;
-            background-color: #f4f4f4;
-            margin-bottom: 8px;
-        }   
-
-        .tweet__content::after {
-            display: block;
-            content: '';
-            width: 100%;
-            height: 1px;
-            background-color: #f4f4f4;
-            margin-bottom: 8px;
-        }   
-
-        #created_at {
-            font-size: 0.7rem;
-            float: right;
-            color: #717171;
-        }
-
-        .tweet-img {
-            width: 100%;
-            box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 
 <body>

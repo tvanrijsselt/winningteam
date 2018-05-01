@@ -3,48 +3,10 @@
 <html>
 
 <head>
-<link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
-
-    <style>
-        form {
-            font-family: 'Poppins', sans-serif;
-            color: #717171;
-        }
-
-        textarea {
-            width: 100%;
-            font-family: 'Poppins', sans-serif;
-            color: #717171;
-            border: 1px solid #E9EBEE;
-            box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.1);
-        }
-
-        #photo {
-            width: 50%;
-            font-family: 'Poppins', sans-serif;
-            color: #717171;
-            border: 1px solid #E9EBEE;
-            box-shadow: 0 2px 2px 0px rgba(0, 0, 0, 0.1);
-        }
-
-        #post_reply {
-            padding: 5px 10px;
-            font-family: 'Poppins', sans-serif;
-            font-size: .7rem;
-            border-radius: 2px;
-            border: 1px solid transparent;
-            background-color: #f6f7f9;
-            border: 1px solid #DADFE2;
-            color: #4B4F56;
-            cursor: pointer;
-            box-shadow: 0 0px 5px 0px rgba(0, 0, 0, 0.1);
-            float: right; 
-        }
-
-        #post_reply:hover {
-            background-color: #E9EBEE;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='styles/femke_styles.css' />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
 </head>
 
 <body>
