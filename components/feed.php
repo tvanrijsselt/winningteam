@@ -4,6 +4,13 @@
 
 <?php require_once('../connect.php'); ?>
 <?php include_once('../queries.php'); ?>
+<?php session_start();
+
+if(isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    $userid = $_SESSION['user-id'];
+  }
+?>
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
@@ -28,7 +35,7 @@
                 </a>
                 <div class='dropdown'>
                     <a href="account.php">Account</a>
-                    <a href="#">Logout</a>
+                    <a href="logout.php">Logout</a>
                 </div>
             </li>
         </ul>
@@ -41,6 +48,15 @@
         <!-- button to show tweets of people you follow -->
         <button id='feed_followings' onclick='feedFollowings()'>Following</button>
     </div>
+
+    <!-- show registration message after succesfully registering -->
+    <?php 
+
+        if(!empty($_SESSION['register-message'])) {
+            echo "<p><strong style='color: green;'>Success:</strong> " . $_SESSION['register-message'];
+            $_SESSION['register-message'] = "";
+        }
+    ?>
 
     <!-- feed for all tweets-->
     <div class='tweets'>

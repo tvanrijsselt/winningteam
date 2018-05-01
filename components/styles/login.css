@@ -29,7 +29,7 @@ h3 {
 
 .container {
   width: 350px;
-  height: 330px;
+  height: 350px;
   border-radius: 10px;
   text-align: center;
   margin: 200px auto 0 auto;
@@ -78,5 +78,17 @@ h3 {
 
 p {
   font-size: .8rem;
-  margin-bottom: 8px;
+  margin: 15px 0 8px 0;
 }
+
+a {
+  text-decoration: none;
+  color: #000;
+  -webkit-transition: color .2s ease;
+  -o-transition: color .2s ease;
+  transition: color .2s ease;
+}
+
+  a:hover {
+    color: #0EBDF5;
+  }
