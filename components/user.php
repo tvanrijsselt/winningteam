@@ -25,7 +25,7 @@
     </a>
     </div>
 </div>
-<span id='created_at'><?php echo $post['created_at']; ?></span> 
+<span id='created_at'><?php echo date('d/m/Y H:i', strtotime($post['created_at'])); ?></span> 
 
 <div class='tweet__content'>
     <?php if ($post['picture'] != ''): ?>

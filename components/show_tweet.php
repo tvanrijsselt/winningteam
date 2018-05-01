@@ -40,15 +40,17 @@ $show_replies = fetch_all($replies . $_POST['id'] . ' ORDER BY replies.id DESC')
                 <?php echo '@' . $reply['username']; ?>
             </a>
         </div>
-        <span id='created_at'><?php echo $reply['created_at']; ?></span> 
 
-        <div class='reply__content'>
+        <div class='reply__content'>        
+            <span id='created_at'><?php echo date('d/m/Y H:i', strtotime($reply['created_at'])); ?></span> 
+
             <?php if ($reply['picture'] != ''): ?>
                 <img onclick=<?php echo 'showTweet(' . $reply['id'] . ')';?> src='<?php echo $reply['picture']; ?>'/>
             <?php endif; ?>
             <!-- display tweet -->
             <div><?php echo $reply['content']; ?></div>
-        </div>
+        </div>  
+
     </div>
 <?php endforeach;?>
 

@@ -61,21 +61,21 @@
     }
   }
 
-  // post tweet from account
-  // if(isset($_POST['action']) && $_POST['action'] == 'post_tweet') {
+  //post tweet from account
+  if(isset($_POST['action']) && $_POST['action'] == 'post_tweet') {
 
-  //   if(!empty($_POST['post_tweet_submit'])) {
+    if(!empty($_POST['post_tweet_submit'])) {
 
-  //     if(empty($_POST['tweet'])) {
-  //       header('Location: ./account.php');
-  //     } else {
-  //       $query = "INSERT INTO tweets (user_id, tweet, picture) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}')";
+      if(empty($_POST['tweet'])) {
+        header('Location: ./account.php');
+      } else {
+        $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}', now())";
 
-  //       run_mysql_query($query);
-  //       header('Location: ./account.php');
-  //     }
-  //   }
-  // }
+        run_mysql_query($query);
+        header('Location: ./feed.php');
+      }
+    }
+  }
 
   //post tweet from feed
   if(isset($_POST['action']) && $_POST['action'] == 'post_tweet_feed') {
@@ -85,7 +85,7 @@
       if(empty($_POST['tweet'])) {
         header('Location: ./feed.php');
       } else {
-        $query = "INSERT INTO tweets (user_id, tweet, picture) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}')";
+        $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}', now())";
 
         run_mysql_query($query);
         header('Location: ./feed.php');

@@ -89,7 +89,7 @@ if(isset($_SESSION['username'])) {
       <!-- <h4>Tweet something</h4> -->
       <form class="" action="./tweet-account-actions.php" method="post">
         <h4>Tweet something</h4>
-        <textarea type="text" name="tweet" value="" class="tweet-post-input" placeholder="Post a new tweet"></textarea>
+        <textarea type="text" name="tweet" value="" class="tweet-post-input" maxlength='280' placeholder="Post a new tweet"></textarea>
         <input id="photo" type="text" name="photo" value="" placeholder="With a photo?" class="tweet-post-input">
         <input type="hidden" name="action" value="post_tweet_feed">
         <input class="account__submit-button" type="submit" name="post_tweet_submit" value="Post tweet">

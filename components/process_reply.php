@@ -9,8 +9,8 @@ $userid = $_SESSION['user-id']; //change to logged in userid
 $tweet_id = $_POST['tweet_id'];
 
 if ($content != '' OR $picture != '') {
-    run_mysql_query("INSERT INTO replies (content, picture, user_id, tweet_id) 
-                 VALUES ('{$content}', '{$picture}', '{$userid}', '{$tweet_id}')");
+    run_mysql_query("INSERT INTO replies (content, picture, user_id, tweet_id, created_at) 
+                 VALUES ('{$content}', '{$picture}', '{$userid}', '{$tweet_id}', now())");
 }
 
 header("Location: feed.php");
