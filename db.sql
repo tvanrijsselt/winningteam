@@ -46,10 +46,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`faves` (
   `user_id` INT(11) NULL,
   `created_at` DATETIME NULL,
   `updated_at` DATETIME NULL,
-  PRIMARY KEY (`id`, `users_id`),
-  INDEX `fk_faves_users1_idx` (`users_id` ASC),
+  PRIMARY KEY (`id`),
+  INDEX `fk_faves_users1_idx` (`user_id` ASC),
   CONSTRAINT `fk_faves_users1`
-    FOREIGN KEY (`users_id`)
+    FOREIGN KEY (`user_id`)
     REFERENCES `mydb`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
