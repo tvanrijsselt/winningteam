@@ -35,6 +35,10 @@ li a {
     display: block;
 }
 
+.navbar a {
+    transition: all .3s ease-out;
+}
+
 .navbar a:hover {
     background-color: rgb(0, 128, 255);
     color: white;        
