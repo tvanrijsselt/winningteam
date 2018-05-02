@@ -66,7 +66,7 @@
 
     if(!empty($_POST['post_tweet_submit'])) {
 
-      if(empty($_POST['tweet'])) {
+      if(empty($_POST['tweet']) && empty($_POST['photo'])) {
         header('Location: ./account.php');
       } else {
         $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}', now())";
@@ -82,7 +82,7 @@
 
     if(!empty($_POST['post_tweet_submit'])) {
 
-      if(empty($_POST['tweet'])) {
+      if(empty($_POST['tweet']) && empty($_POST['photo'])) {
         header('Location: ./feed.php');
       } else {
         $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','{$_POST['tweet']}', '{$_POST['photo']}', now())";
