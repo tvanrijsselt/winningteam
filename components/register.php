@@ -76,22 +76,23 @@
           $encrypted_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
           $email = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['email']))));
+
+          $query = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('{$firstname}', '{$lastname}', '{$username}', '{$email}', '{$encrypted_password}')";
+
+          if(run_mysql_query($query)) {
+            $_SESSION['register-message'] = "Registration successful!";
+            $_SESSION['username'] = $username;
+            $_SESSION['password'] = $password;
+            $userid = fetch_record("SELECT id FROM users WHERE username = '$username'")['id'];
+            $_SESSION['user-id'] = $userid;
+            header("Location: ./feed.php");
+          } else {
+            $_SESSION['register-message'] = "Failed to register. Try again!";
+          }
         }
       }
     }
-
-  // To-do: if the query fails then a new user id is generated anyway. correct this by nesting this query and all the other if statements.
-  $query = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('{$firstname}', '{$lastname}', '{$username}', '{$email}', '{$encrypted_password}')";
-
-  if(run_mysql_query($query)) {
-    $_SESSION['register-message'] = "Registration successful!";
-    $_SESSION['username'] = $username;
-    $_SESSION['password'] = $password;
-    header("Location: ./feed.php");
-  } else {
-    $_SESSION['register-message'] = "Failed to register. Try again!";
   }
-}
 
  ?>
 

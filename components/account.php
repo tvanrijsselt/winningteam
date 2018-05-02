@@ -218,6 +218,7 @@
       <input class="account__submit-button" type="submit" name="delete-tweets" value="Delete Tweet(s)" onclick="return confirm('Are you sure you want to delete this tweet?');">
     </form>
 
+    <!-- FORM FOR EDITING TWEET(S) -->
     <form class="" action="./tweet-account-actions.php" method="post">
       <h3>Edit tweet(s)</h3>
       <p>
@@ -225,7 +226,10 @@
           if(!empty($_SESSION['message-success-tweet'])) {
             echo "<strong style='color: green;'>Success:</strong> " . $_SESSION['message-success-tweet'];
             $_SESSION['message-success-tweet'] = "";
-            $_SESSION['errors'] = array();
+          }
+          if(!empty($_SESSION['message-fail-tweet'])) {
+            echo "<strong style='color: red;'>Fail:</strong> " . $_SESSION['message-fail-tweet'];
+            $_SESSION['message-fail-tweet'] = "";
           }
       ?>
       </p>
@@ -258,7 +262,7 @@
       </div>
     </div> -->
 
-    <br><br><br>
+    <br>
 
     <!-- show tweets -->
     <!-- <?php foreach(fetch_all("SELECT tweet, tweets.id, firstname, lastname, profile_pic, username, users.id, tweets.picture FROM tweets JOIN users ON tweets.user_id = users.id WHERE users.id = $userid") as $tweet): ?>
@@ -277,7 +281,15 @@
       </div>
       <br>
     <?php endforeach; ?> -->
-
+    
+    <p>
+        <?php 
+          if(!empty($_SESSION['message-fail-post'])) {
+            echo "<strong style='color: red;'>Fail:</strong> " . $_SESSION['message-fail-post'];
+            $_SESSION['message-fail-post'] = "";
+          }
+      ?>
+    </p>
     <div class="tweet-post-container">
       <!-- <h4>Tweet something</h4> -->
       <form class="" action="./tweet-account-actions.php" method="post">

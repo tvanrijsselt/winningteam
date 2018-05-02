@@ -14,42 +14,6 @@
     header("Location: account.php");
   }
 
-  // if($_SERVER["REQUEST_METHOD"] == "POST") {
-  //
-  //   if(empty($_POST['username'])) {
-  //     $usernameError = "Username is required.";
-  //   } else {
-  //     if (empty($_POST['password'])) {
-  //       $passError = "Password is required.";
-  //     } else {
-  //       // check if username is correct
-  //       $query = "SELECT * FROM users WHERE username = '{$_POST['username']}'";
-  //       $userCheck = fetch_record($query);
-  //
-  //       if($userCheck) {
-  //         $username = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['username']))));
-  //
-  //         $password = escape_this_string($_POST['password']);
-  //         $userid = fetch_record("SELECT id FROM users WHERE username = '$username'")['id'];
-  //         $userPassword = fetch_record("SELECT password FROM users WHERE username = '$username'")['password'];
-  //
-  //         // check if password is correct
-  //         if(password_verify($password, $userPassword)) {
-  //           $_SESSION['login-message'] = "Success!";
-  //           $_SESSION['user-id'] = $userid;
-  //           $_SESSION['username'] = $username;
-  //           $_SESSION['password'] = $password;
-  //           header('Location: account.php');
-  //         } else {
-  //           $_SESSION['login-message'] = "Password incorrect! Try again.";
-  //         }
-  //       } else {
-  //         $_SESSION['login-message'] = "Username incorrect! Try again.";
-  //       }
-  //     }
-  //   }
-  // }
-
   if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if(empty($_POST['username'])) {
@@ -62,7 +26,7 @@
       if($userCheck) {
         $username = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['username']))));
 
-        $password = escape_this_string($_POST['password']);
+        $password = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['password']))));
         $userid = fetch_record("SELECT id FROM users WHERE username = '$username'")['id'];
         $userPassword = fetch_record("SELECT password FROM users WHERE username = '$username'")['password'];
 
