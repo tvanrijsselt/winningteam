@@ -69,97 +69,110 @@
       }
     }
   }
-
-  //post tweet from account
+  
+  // post tweet from account
+  // this code is such as mess :(
   if(isset($_POST['action']) && $_POST['action'] == 'post_tweet') {
 
     if(!empty($_POST['post_tweet_submit'])) {
-
       $postTweet = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['tweet']))));
       $postTweetPhoto = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['photo']))));
 
-      if(empty($postTweet)) {
-        header('Location: ./account.php');
-      } else {
+      // if both input fields for the tweet are empty, redirect to the account page
+      if(empty($postTweet) && empty($postTweetPhoto)) {
+        $_SESSION['message-fail-post'] = "How lonely is the sound of a silent bird.";
+        header("Location: ./account.php");
+      } 
+      if(empty($postTweet) && !empty($postTweetPhoto)) {
+        // if the text input is empty but the photo is not, then just post the photo 
 
-        if(!empty($postTweetPhoto)) {
-          if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postTweetPhoto)) {
+        // check the url validity of the photo
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postTweetPhoto)) {
             $_SESSION['message-fail-post'] = "URL is not valid.";
             header("Location: ./account.php");
           } else {
-            $_SESSION['message-fail-post'] = "";
-            $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweet', '$postTweetPhoto', now())";
+            // if the url of the photo is valid, insert the photo
+            $query = "INSERT INTO tweets (user_id, picture, created_at) VALUES ('$userid', '$postTweetPhoto', now())";
 
             run_mysql_query($query);
             header('Location: ./feed.php');
           }
-        }
-        $_SESSION['message-fail-post'] = "";
-        $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweet', '$postTweetPhoto', now())";
+      } 
+      // if the text tweet input is not empty but the photo input is, just post the tweet
+      if(empty($postTweetPhoto) && !empty($postTweet)) {
+        $query = "INSERT INTO tweets (user_id, tweet, created_at) VALUES ('$userid','$postTweet', now())";
 
         run_mysql_query($query);
         header('Location: ./feed.php');
-      } 
+      }
+      if(!empty($postTweet) && !empty($postTweetPhoto))
+      {
+        // if the text tweet input is not empty and the photo input is also not empty, check if the url is valid
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postTweetPhoto)) {
+          $_SESSION['message-fail-post'] = "URL is not valid.";
+          header("Location: ./account.php");
+        } else {
+          // if the url of the photo is valid, insert both the photo and the text
+          $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweet', '$postTweetPhoto', now())";
+
+          run_mysql_query($query);
+          header('Location: ./feed.php');
+        }
+      }
     }
   }
 
-  //post tweet from feed
+  // post tweet from feed
+  // this code is such as mess :(
   if(isset($_POST['action']) && $_POST['action'] == 'post_tweet_feed') {
 
     if(!empty($_POST['post_tweet_submit'])) {
-
       $postTweetFeed = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['tweet']))));
       $postPhotoFeed = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['photo']))));
 
-      if(empty($postTweetFeed)) {
-        header('Location: ./feed.php');
-      } else {
+      // if both input fields for the tweet are empty, redirect to the account page
+      if(empty($postTweetFeed) && empty($postPhotoFeed)) {
+        $_SESSION['message-fail-post'] = "How lonely is the sound of a silent bird.";
+        header("Location: ./feed.php");
+      } 
+      if(empty($postTweetFeed) && !empty($postPhotoFeed)) {
+        // if the text input is empty but the photo is not, then just post the photo 
 
-        if(!empty($postPhotoFeed)) {
-          if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postPhotoFeed)) {
-            // $_SESSION['message-fail-post'] = "URL is not valid.";
+        // check the url validity of the photo
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postPhotoFeed)) {
+            $_SESSION['message-fail-post'] = "URL is not valid.";
             header("Location: ./feed.php");
           } else {
-            // $_SESSION['message-fail-post'] = "";
-            $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweetFeed', '$postPhotoFeed', now())";
+            // if the url of the photo is valid, insert the photo
+            $query = "INSERT INTO tweets (user_id, picture, created_at) VALUES ('$userid', '$postPhotoFeed', now())";
 
             run_mysql_query($query);
             header('Location: ./feed.php');
           }
-        }
-        // $_SESSION['message-fail-post'] = "";
-        $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweetFeed', '$postPhotoFeed', now())";
+      } 
+      // if the text tweet input is not empty but the photo input is, just post the tweet
+      if(empty($postPhotoFeed) && !empty($postTweetFeed)) {
+        $query = "INSERT INTO tweets (user_id, tweet, created_at) VALUES ('$userid','$postTweetFeed', now())";
 
         run_mysql_query($query);
         header('Location: ./feed.php');
-      } 
+      }
+      if(!empty($postTweetFeed) && !empty($postPhotoFeed))
+      {
+        // if the text tweet input is not empty and the photo input is also not empty, check if the url is valid
+        if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postPhotoFeed)) {
+          $_SESSION['message-fail-post'] = "URL is not valid.";
+          header("Location: ./feed.php");
+        } else {
+          // if the url of the photo is valid, insert both the photo and the text
+          $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweetFeed', '$postPhotoFeed', now())";
+
+          run_mysql_query($query);
+          header('Location: ./feed.php');
+        }
+      }
     }
   }
-
-  // //post tweet from feed
-  // if(isset($_POST['action']) && $_POST['action'] == 'post_tweet_feed') {
-
-  //   $postTweetFeed = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['tweet']))));
-  //   $postPhotoFeed = escape_this_string(htmlspecialchars(strip_tags(trim($_POST['photo']))));
-
-  //   if(!empty($_POST['post_tweet_submit'])) {
-
-  //     if(empty($postTweetFeed)) {
-  //       header('Location: ./feed.php');
-  //     } else {
-
-  //       if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $postPhotoFeed)) {
-  //         header("Location: ./feed.php");
-  //       } else {
-
-  //         $query = "INSERT INTO tweets (user_id, tweet, picture, created_at) VALUES ('$userid','$postTweetFeed', '$postPhotoFeed', now())";
-
-  //         run_mysql_query($query);
-  //         header('Location: ./feed.php');
-  //       }
-  //     }
-  //   }
-  // }
 
   // Edit photo //
   if(!empty($_POST['edit_photo_submit'])) {
